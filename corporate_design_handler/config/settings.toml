@@ -1,0 +1,31 @@
+# RLI Colors
+[colors]
+# blues
+prussian_blue = [0, 46, 80]
+san_juan = [51, 88, 115]
+lynch = [102, 130, 150]
+gull_gray = [153, 171, 185]
+geyser = [204, 213, 220]
+# grays
+silver_chalice = [166, 166, 166]
+silver = [193, 193, 193]
+alto = [219, 219, 219]
+white = [255, 255, 255]
+# colorful
+matisse = [34, 116, 165]
+chateau_green = [68, 175, 105]
+crusta = [254, 127, 45]
+buttercup = [241, 196, 15]
+
+
+[color_class]
+min_rgb_value = 0
+max_rgb_value = 255
+
+
+[color_maps]
+blues = ["prussian_blue", "san_juan", "lynch", "gull_gray", "geyser"]
+grays = ["silver_chalice", "silver", "alto", "white"]
+colorful = ["matisse", "chateau_green", "crusta", "buttercup"]
+blue_to_orange = ["prussian_blue", "lynch", "buttercup", "crusta"]
+green_to_orange = ["chateau_green", "buttercup", "crusta"]
