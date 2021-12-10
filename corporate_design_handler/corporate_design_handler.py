@@ -11,7 +11,6 @@ from corporate_design_handler.src.tools import validate_color_map
 # TODO:
 #  logging with loguru https://pypi.org/project/loguru/
 #  docstrings
-#  pytests
 #  type checking
 #  flake8, black
 
