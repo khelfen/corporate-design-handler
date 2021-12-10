@@ -22,8 +22,12 @@ requirements = [
 ]
 
 test_requirements = [
-    "pytest >= 3",
-    "numpy >= 1"
+    "pytest >= 6",
+    "numpy >= 1",
+    "tox >= 3.24",
+    "flake8 >= 4",
+    "black >= 21.12b0",
+    "mypy >= 0.91"
 ]
 
 extras = {
@@ -67,6 +71,7 @@ setup(
     include_package_data=True,
     keywords="corporate_design_handler",
     name="corporate_design_handler",
+    package_dir={"corporate_design_handler": "corporate_design_handler"},
     packages=find_packages(
         include=["corporate_design_handler", "corporate_design_handler.*"]),
     test_suite="tests",

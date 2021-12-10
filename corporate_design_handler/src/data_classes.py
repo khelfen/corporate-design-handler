@@ -1,5 +1,5 @@
 from collections import namedtuple
-from ..config.config import settings
+from corporate_design_handler.config.config import settings
 
 
 RGB = namedtuple(
