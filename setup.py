@@ -27,7 +27,8 @@ test_requirements = [
     "tox >= 3.24",
     "flake8 >= 4",
     "black >= 21.12b0",
-    "mypy >= 0.91"
+    "mypy >= 0.91",
+    "twine >= 3.7"
 ]
 
 extras = {
@@ -52,16 +53,16 @@ class InstallSetup(install):
 setup(
     author="Kilian Helfenbein",
     author_email="kilian.helfenbein@rl-institut.de",
-    python_requires=">=3.6",
+    python_requires=">=3.8",
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Natural Language :: English",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.1ß",
     ],
     description=("Corporate design handler to generate color maps for plotting"
                  " with python."),

@@ -9,18 +9,15 @@ from corporate_design_handler.src.tools import validate_color_map
 
 
 # TODO:
-#  logging with loguru https://pypi.org/project/loguru/
 #  docstrings
 #  type checking
-#  flake8, black
 
 
 class ColorHandler:
-    """ ColorHandler Class """
-    def __init__(self, colors=None, color_maps=None):
-        """
+    """ColorHandler Class"""
 
-        """
+    def __init__(self, colors=None, color_maps=None):
+        """ """
         if colors is None:
             colors = dict(settings.colors)
         if color_maps is None:
@@ -35,17 +32,18 @@ class ColorHandler:
 
     @colors.setter
     def colors(self, colors):
-        """
-        """
+        """ """
         try:
             self._colors = {
                 name: Color(red=red, green=green, blue=blue)
-                for name, (red, green, blue) in colors.items()}
+                for name, (red, green, blue) in colors.items()
+            }
 
         except ValueError:
             raise ValueError(
                 "Colors must be given as a dictionary with the color name as "
-                "dict key and the RGB values as list as dict value.") from None
+                "dict key and the RGB values as list as dict value."
+            ) from None
 
     def update_colors(self, new_colors):
         colors = self.colors
@@ -63,7 +61,8 @@ class ColorHandler:
             raise ValueError(
                 "Provide colors to remove either in form of a list with the "
                 "keys you want to remove or in the case of a single color as "
-                "string.") from None
+                "string."
+            ) from None
 
     @property
     def color_maps(self):
@@ -80,14 +79,16 @@ class ColorHandler:
             if not all(val in color_keys for val in values):
 
                 values_not_in_keys = [
-                    val for val in values if val not in color_keys]
+                    val for val in values if val not in color_keys
+                ]
 
                 raise ValueError(
                     "Not all color names are represented within the given "
                     "colors. Make sure the given color maps only include "
                     "colors which are represented. The following colors in "
                     f"color map {key} are not within the colors: "
-                    f"{values_not_in_keys}") from None
+                    f"{values_not_in_keys}"
+                ) from None
 
         self._color_maps = color_maps
 
@@ -107,12 +108,13 @@ class ColorHandler:
             raise ValueError(
                 "Provide color maps to remove either in form of a list with "
                 "the keys you want to remove or in the case of a single color "
-                "map as string.") from None
+                "map as string."
+            ) from None
 
     def mpl_listed_colormap(
-        self, color_map="blues", reverse=False, n_colors=None, **kwargs):
-        color_map = validate_color_map(
-            self, color_map, reverse=reverse)
+        self, color_map="blues", reverse=False, n_colors=None, **kwargs
+    ):
+        color_map = validate_color_map(self, color_map, reverse=reverse)
 
         if n_colors is None:
             n_colors = len(color_map)
@@ -124,34 +126,41 @@ class ColorHandler:
                     "Please provide the total number of colors as integer."
                 ) from None
 
-        return ListedColormap(
-            color_map, N=n_colors)
+        return ListedColormap(color_map, N=n_colors)
 
     def mpl_linear_segmented_color_map(
-        self, color_map="green_to_orange", reverse=False,
-        distribution="uniform", cvals=None, cmap_name="", **kwargs):
-        color_map = validate_color_map(
-            self, color_map, reverse=reverse)
+        self,
+        color_map="green_to_orange",
+        reverse=False,
+        distribution="uniform",
+        cvals=None,
+        cmap_name="",
+        **kwargs,
+    ):
+        color_map = validate_color_map(self, color_map, reverse=reverse)
 
         if distribution == "custom":
             # https://stackoverflow.com/a/46778420/13491957
             if cvals is None:
                 raise ValueError(
                     "Please provide the variable 'cvals' if the distribution "
-                    "is set to custom.") from None
+                    "is set to custom."
+                ) from None
             elif len(cvals) != len(color_map):
                 raise ValueError(
                     "Please provide a matching number of values that "
                     "correspond to the colors of your color map. The given "
                     f"number of values is {len(cvals)} while the number of "
-                    f"colors is {len(color_map)}.") from None
+                    f"colors is {len(color_map)}."
+                ) from None
 
             norm = plt.Normalize(min(cvals), max(cvals))
 
             color_map = list(zip(map(norm, cvals), color_map))
 
         return LinearSegmentedColormap.from_list(
-            name=cmap_name, colors=color_map, **kwargs)
+            name=cmap_name, colors=color_map, **kwargs
+        )
 
     def copy(self, deep=True):
         """Return a copy of the color handler."""
@@ -166,8 +175,10 @@ class ColorHandler:
         return len(self.colors)
 
     def __str__(self):
-        return (f"{self.__class__.__name__}({len(self.colors)} colors, "
-                f"{len(self.color_maps)} color maps)")
+        return (
+            f"{self.__class__.__name__}({len(self.colors)} colors, "
+            f"{len(self.color_maps)} color maps)"
+        )
 
     def __repr__(self):
         message = str(self)
@@ -178,14 +189,15 @@ class ColorHandler:
         if len(self.colors) > 0:
             message += "Colors:\n"
             for name, color in self.colors.items():
-                message += (name + ": " + str(color) + "\n")
+                message += name + ": " + str(color) + "\n"
 
         if len(self.color_maps) > 0:
             message += "Color Maps:\n"
             for name, color_map in self.color_maps.items():
-                message += (name + ": " + str(color_map) + "\n")
+                message += name + ": " + str(color_map) + "\n"
 
         return message
+
 
 if __name__ == "__main__":
     ColorHandler()
